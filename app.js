@@ -1,4 +1,4 @@
-const API_BASE_URL = './api';
+const API_BASE_URL = 'http://localhost/midterm_pwa/api';
 let tasks = [];
 
 const taskList = document.getElementById('taskList');
@@ -91,11 +91,11 @@ async function addTask() {
         const newTask = { title: title, status: "pending" }; // Bỏ id tĩnh đi để khi push lên server lấy ID chuẩn
         const transaction = db.transaction(["offline_tasks"], "readwrite");
         const store = transaction.objectStore("offline_tasks");
-
+        
         store.put(newTask);
         transaction.oncomplete = () => {
             // Hiển thị tạm thời cho User thấy
-            tasks.unshift({ id: Date.now(), ...newTask });
+            tasks.unshift({ id: Date.now(), ...newTask }); 
             renderTasks();
             alert("Mất mạng: Đã lưu công việc cục bộ!");
         };
@@ -106,9 +106,9 @@ async function addTask() {
 window.toggleTask = async function (id) {
     const task = tasks.find(t => t.id === id);
     if (!task) return;
-
+    
     const newStatus = task.status === 'pending' ? 'completed' : 'pending';
-
+    
     if (navigator.onLine) {
         try {
             await fetch(`${API_BASE_URL}/tasks.php?id=${id}`, {
@@ -177,15 +177,15 @@ function syncOfflineTasks() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ offline_tasks: offlineTasks })
             });
-
+            
             const result = await response.json();
             if (result.status === 'success') {
                 alert(`Đã đồng bộ thành công ${offlineTasks.length} công việc lên Server!`);
-
+                
                 // Dọn dẹp DB offline
                 const clearTx = db.transaction(["offline_tasks"], "readwrite");
                 clearTx.objectStore("offline_tasks").clear();
-
+                
                 // Tải lại danh sách mới nhất từ server
                 fetchTasks();
             }
@@ -235,7 +235,7 @@ async function setupNotificationToken() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ device_token: mockDeviceToken })
         });
-
+        
         new Notification("PWA Task Tracker", {
             body: "Đã bật thông báo thành công!",
             icon: "https://cdn-icons-png.flaticon.com/512/906/906334.png"

@@ -1,33 +1,33 @@
 # PWA Task Tracker - Midterm Project
 
-Midterm project for the Web Programming course: A Task Tracker application built using Progressive Web App (PWA) technology with a PHP MVC Backend architecture.
+Dự án Giữa kỳ môn Lập trình Web: Ứng dụng quản lý công việc (Task Tracker) áp dụng công nghệ Progressive Web App (PWA) với kiến trúc MVC PHP Backend.
 
-## Team Members
+## Thành viên nhóm
 
-- **Trần Thị Ngọc Như** (Student ID: 524H0021) - (UI/UX Design, PWA Logic).
-- **Nguyễn Thành An** (Student ID: 519H0133) - (PHP Backend, RESTful API, Database & Sync) and Frontend Completion.
+- **Trần Thị Ngọc Như** (MSSV: 524H0021) - Dev A (UI/UX Design, PWA Logic).
+- **Nguyễn Thành An** (MSSV: 519H0133) - Dev B (PHP Backend, RESTful API, Database & Sync) & Hoàn thiện Frontend.
 
-## Key Features
+## Tính năng nổi bật
 
-- **Offline-first:** Users can add tasks even without an internet connection (using IndexedDB).
-- **Auto-Sync:** Automatically synchronizes local data with the MySQL server once the network connection is restored.
-- **RESTful API:** Backend system built with pure PHP following the MVC architecture, communicating via JSON.
-- **Push Notifications:** Supports device token registration and notifications (simulated device token implementation).
-- **Installable App:** Includes `manifest.json` and `sw.js`, allowing users to install the application on desktop or mobile devices.
+- **Offline-first:** Có thể thêm công việc ngay cả khi không có kết nối mạng (sử dụng IndexedDB).
+- **Auto-Sync:** Tự động đồng bộ dữ liệu cục bộ lên MySQL Server khi có mạng trở lại.
+- **RESTful API:** Hệ thống Backend viết bằng PHP thuần chuẩn MVC, giao tiếp qua JSON.
+- **Push Notification:** Hỗ trợ đăng ký và nhận thông báo (Mô phỏng lấy Token thiết bị).
+- **Cài đặt như App:** Ứng dụng có file `manifest.json` và `sw.js` để có thể "Add to Home Screen" trên điện thoại/máy tính.
 
-## Installation & Setup (For Instructors)
+## Cài đặt & Khởi chạy (Dành cho Giảng viên chấm bài)
 
-1. Clone or copy the `midterm_pwa` folder into `C:\xampp\htdocs\`.
-2. Open phpMyAdmin and create a database named `pwa_task_tracker`.
-3. Import the SQL script (attached in the report) or manually run the SQL commands to create the `tasks` and `devices` tables.
-4. Open `config/Database.php` and ensure the database credentials match your XAMPP configuration (default: `root` / empty password).
-5. Access the application at: `http://localhost/midterm_pwa/index.html`
+1. Clone hoặc copy thư mục `midterm_pwa` vào `C:\xampp\htdocs\`.
+2. Mở phpMyAdmin, tạo database tên là `pwa_task_tracker`.
+3. Import script SQL (đính kèm trong báo cáo) hoặc chạy lệnh khởi tạo bảng `tasks` và `devices`.
+4. Mở file cấu hình `config/Database.php` và đảm bảo thông tin user/password khớp với XAMPP của thầy/cô (mặc định: root / rỗng).
+5. Truy cập ứng dụng tại: `http://localhost/midterm_pwa/index.html`
 
-## API Endpoints
+## Cấu trúc API (Endpoints)
 
-- `GET /api/tasks.php` : Retrieve all tasks.
-- `POST /api/tasks.php` : Create a new task.
-- `PUT /api/tasks.php?id={id}` : Update task completion status.
-- `DELETE /api/tasks.php?id={id}` : Delete a task.
-- `POST /api/sync.php` : Synchronize offline IndexedDB tasks with the server.
-- `POST /api/subscribe.php` : Register a device token for push notifications.
+- `GET /api/tasks.php` : Lấy danh sách công việc.
+- `POST /api/tasks.php` : Tạo công việc mới.
+- `PUT /api/tasks.php?id={id}` : Cập nhật trạng thái hoàn thành.
+- `DELETE /api/tasks.php?id={id}` : Xóa công việc.
+- `POST /api/sync.php` : Đồng bộ mảng tasks từ IndexedDB lên Server.
+- `POST /api/subscribe.php` : Đăng ký Device Token để nhận thông báo.
